@@ -39,12 +39,12 @@ app.use(
             io.emit('newMessage', 
                 genMsg( msg.from, msg.text)
             );
-            callback('SUCESS');
+            callback();
       
         });
 
         socket.on('geolocation', (cord) => {
-            io.emit('newLocMessage', genLocMsg('Admin', cord.latitude, cord.longitude));
+            io.emit('newLocMessage', genLocMsg('User', cord.latitude, cord.longitude));
         });
         
     }); // fim de io    
