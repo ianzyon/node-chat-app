@@ -25,7 +25,7 @@ app.use(
         });
         // boas vindas from Admin.
         socket.emit('newMessage', 
-            genMsg('Admin', 'Welcome to this chat!')
+            genMsg('Admin', 'Bem-vindo ao chat!')
         );
          
         socket.broadcast.emit('newMessage',
