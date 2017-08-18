@@ -185,7 +185,9 @@ button:disabled {
     .chat__main {
     display: flex;
     flex-direction: column;
-    
+    -ms-overflow-style: scroll;
+    flex-direction: column;
+    height: 100vh;
     }
 
   .chat__sidebar {
@@ -217,7 +219,7 @@ button:disabled {
   .chat__footer button {
     margin-right: 0px;
   }
-  button {
-    margin-top: 20px;
-}
+  #send-msg {
+    display:none;
+  }
 }
