@@ -4,7 +4,7 @@ const publicPath = path.join(__dirname, '../public');
 const express = require('express');
 const socketIO = require('socket.io');
 
-const {genMsg} = require('./utils/message');
+const {genMsg, genLocMsg} = require('./utils/message');
 // config express 
 var app = express();
 var server = http.createServer(app);
@@ -43,11 +43,9 @@ app.use(
       
         });
 
-        // socket.on('createEmail', (newEmail)=>{
-        //     console.log("Create email", newEmail);
-        // });
-
-
+        socket.on('geolocation', (cord) => {
+            io.emit('newLocMessage', genLocMsg('Admin', cord.latitude, cord.longitude));
+        });
         
     }); // fim de io    
    

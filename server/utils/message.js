@@ -12,8 +12,15 @@ var genMsg = (from, text) => {
         createdAt: DateNow()
     }
 };
-
+var genLocMsg = (from, lat, lng) => {
+    return {
+        from,
+        url: `https://www.google.com/maps?q=${lat},${lng}`,
+        createdAt: DateNow()
+    }
+};
 
 module.exports = {
-    genMsg
+    genMsg,
+    genLocMsg
 };

@@ -10,16 +10,20 @@
     <body>
         <div class="container">
 
-            <h3>Welcome to the chat app</h3>
+            <h2>Welcome to the chat app</h2>
             <ol id="msgList">  
             </ol>
 
             <form id="msg-form" class="form-inline">
                 <input class="form-control col-5" type="text" name="message" value="" placeholder="Message Here">
-                <button class="btn btn-primary" style="margin-left: 20px;">Send</button> 
+                <button class="btn btn-primary" type="submit" style="margin-left: 20px;">Send</button> 
+                <button id="send-loc"class="btn btn-success" type="button" style="margin-left: 20px;">Mandar Local</button> 
             </form>
+            <div id="my-alert">
+                
+            </div>
         </div>
-        
+       
     </body>
     
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
