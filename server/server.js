@@ -4,18 +4,15 @@ const publicPath = path.join(__dirname, '../public');
 const express = require('express');
 const socketIO = require('socket.io');
 
+const {genMsg} = require('./utils/message');
 // config express 
 var app = express();
 var server = http.createServer(app);
 var io = socketIO(server); // integrando S.IO com o server e express
 
+// config de porta
 const port = process.env.PORT || 3000;
-// função data
 
-function DateNow() {
-    var t = new Date();
-    return date = t.getDate()+"-"+ (t.getMonth()+1) +" "+ t.getHours()+":"+ t.getMinutes();
-};
 // middleware
 app.use(
     express.static(publicPath));
@@ -27,33 +24,23 @@ app.use(
             console.log("User left.");
         });
         // boas vindas from Admin.
-        socket.emit('joinChat', {
-            from: "Admin",
-            text: "Welcome to this chat"
-            } 
+        socket.emit('newMessage', 
+            genMsg('Admin', 'Welcome to this chat!')
         );
          
-        socket.broadcast.emit('newMessage',{
-            text: "New user joined",
-            At: DateNow()
-        });
+        socket.broadcast.emit('newMessage',
+            genMsg('Admin', 'New User Joined.')
+        );
 
         // recebendo novas mensagens
-        socket.on('createMessage', (msg)=>{
+        socket.on('createMessage', (msg, callback )=>{
             console.log("Msg: ", msg);
-
-            
             // emite novas mensagens
-            io.emit('newMessage', {
-                "from": msg.from,
-                "text": msg.text,
-                "createdAt": DateNow()
-            });
-            // socket.broadcast.emit('newMessage', {
-            //     "from": msg.from,
-            //     "text": msg.text,
-            //     "createdAt": d.date
-            // });
+            io.emit('newMessage', 
+                genMsg( msg.from, msg.text)
+            );
+            callback('SUCESS');
+      
         });
 
         // socket.on('createEmail', (newEmail)=>{

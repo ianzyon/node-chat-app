@@ -4,12 +4,28 @@
         <title></title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css" integrity="sha384-rwoIResjU2yc3z8GV/NPeZWAv56rSmLldC3R/AZzGRnGxQQKnKkoFVhFQhNUwEyJ" crossorigin="anonymous">
         <link href="" rel="stylesheet">
     </head>
     <body>
-        <p>Welcome to the chat app</p>
+        <div class="container">
+
+            <h3>Welcome to the chat app</h3>
+            <ol id="msgList">  
+            </ol>
+
+            <form id="msg-form" class="form-inline">
+                <input class="form-control col-5" type="text" name="message" value="" placeholder="Message Here">
+                <button class="btn btn-primary" style="margin-left: 20px;">Send</button> 
+            </form>
+        </div>
+        
     </body>
     
-    <script src="/socket.io/socket.io.js"></script>    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+    <script src="/socket.io/socket.io.js"></script>   <!-- Lembrar de importar os arquivos na ordem dos thirdparty para os locais -->
+    <script src="/js/libs/jquery-3.2.1.min.js"></script> 
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/js/bootstrap.min.js" integrity="sha384-vBWWzlZJ8ea9aCX4pEW3rVHjgjt7zpkNpZk+02D9phzyeVkE+jo0ieGizqPLForn" crossorigin="anonymous"></script>
     <script src="/js/index.js"></script>
+   
 </html>
