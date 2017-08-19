@@ -8,7 +8,7 @@ describe('genMsg', ()=>{
         var text = 'Some message';
         var message = genMsg(from, text);
 
-        expect(message.createdAt).toBeA('string');
+        expect(message.createdAt).toBeA('number');
         expect(message).toInclude({
             from,
             text
@@ -25,7 +25,7 @@ describe('genLocMsg', () =>{
 
         var message = genLocMsg( from, lat, lng);
 
-        expect(message.createdAt).toBeA('string');
+        expect(message.createdAt).toBeA('number');
         expect(message).toInclude({from, url});
     });
 });

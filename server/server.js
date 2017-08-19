@@ -4,6 +4,7 @@ const publicPath = path.join(__dirname, '../public');
 const express = require('express');
 const socketIO = require('socket.io');
 
+
 const {genMsg, genLocMsg} = require('./utils/message');
 // config express 
 var app = express();

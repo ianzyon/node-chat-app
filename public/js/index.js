@@ -1,4 +1,4 @@
- var socket = io();
+var socket = io();
  
 socket.on('connect', function() { // ES5 permitido nos navegadores apenas
     console.log("Connected to Server");
@@ -10,10 +10,11 @@ socket.on('disconnect', function() {
 socket.on('newMessage', function(msg){
     console.log(msg);
 
+    var fTime = moment(msg.createdAt).format("h:mm a");
     // manipular uma lista
     var li = $('<li></li>');
     // manipular texto da lista
-    li.text(`${msg.from}: ${msg.text}`);
+    li.text(`${msg.from} ${fTime}: ${msg.text}`);
     // inserir child na lista 
     $('#msgList').append(li);
 });
@@ -21,11 +22,12 @@ socket.on('newMessage', function(msg){
 
 // socket NEW LOCATION
 socket.on('newLocMessage', function (msg) {
+     var fTime = moment(msg.createdAt).format("h:mm a");
     // manipular uma lista
     var li = $('<li></li>');
     var a = $('<a target="_blank">Meu local agora.</a>');
     // manipular texto da lista
-    li.text(`${msg.from}: `);
+    li.text(`${msg.from} ${fTime}: `);
     a.attr('href', msg.url);
     // inserir child na lista
     li.append(a);
@@ -77,5 +79,5 @@ locBtn.on('click', function () {
     }, function() {
         locBtn.removeAttr('disabled').text('Mandar Local');
         return $('#my-alert').html(b4_alert('Erro!','Não conseguimos trazer o local.'));
-    })
+    });
   });
