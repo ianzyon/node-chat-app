@@ -15,44 +15,46 @@
         </div>
 
         <div class="chat__main">
-                <ol id="msgList" class="chat__messages">  
-                    <!-- Alerts  -->
-                    <li id="my-alert"> 
-                    </li>  
-                </ol>  
+
+            <ol id="msgList" class="chat__messages">  
+                <!-- Alerts  -->
+                <li id="my-alert"> 
+                </li>  
+            </ol>  
+            
                 
-                <script id="message-template" type="text/template">
-                    <li class="message">
-                        <div class="message__title">
-                            <h3>{{from}}</h3>
-                            <span>{{createdAt}}</span>
-                        </div>
-                        <div class="message__body">
-                            <p>{{text}}</p>
-                        </div>
-                    </li>    
-                </script>
-                <script id="loc-message-template" type="text/template">
-                    <li class="message">
-                        <div class="message__title">
-                            <h3>{{from}}</h3>
-                            <span>{{createdAt}}</span>
-                        </div>
-                        <div class="message__body">
-                            <a href="{{url}}" target="_blank">{{text}}</a> <!-- _blank para abrir uma nova aba -->
-                        </div>
-                    </li>    
-                </script>
-                <div class="chat__footer">
-                    <!-- Forms and buttons  -->
-                    <form id="msg-form" class="form-inline">
-                        <input class="form-control col-lg" type="text" name="message" value="" placeholder="Message Here" autofocus autocomplete="off">
-                        <button id="send-msg"class="" type="submit" >Send</button> 
-                        <button id="send-loc"class="" type="button" style="margin-left: 10px;">Mandar Local</button> 
-                    </form> 
-                </div>
+            <div class="chat__footer">
+                <!-- Forms and buttons  -->
+                <form id="msg-form" class="form-inline">
+                    <input class="form-control col-lg" type="text" name="message" value="" placeholder="Message Here" autofocus autocomplete="off">
+                    <button id="send-msg"class="" type="submit" >Send</button> 
+                    <button id="send-loc"class="" type="button" style="margin-left: 10px;">Mandar Local</button> 
+                </form> 
+            </div>
+
         </div>
-       
+        <script id="message-template" type="text/template">
+            <li class="message">
+                <div class="message__title">
+                    <h3>{{from}}</h3>
+                    <span>{{createdAt}}</span>
+                </div>
+                <div class="message__body">
+                    <p>{{text}}</p>
+                </div>
+            </li>    
+        </script>
+        <script id="loc-message-template" type="text/template">
+            <li class="message">
+                <div class="message__title">
+                    <h3>{{from}}</h3>
+                    <span>{{createdAt}}</span>
+                </div>
+                <div class="message__body">
+                    <a href="{{url}}" target="_blank">{{text}}</a> <!-- _blank para abrir uma nova aba -->
+                </div>
+            </li>    
+        </script>
     </body>
    
 
