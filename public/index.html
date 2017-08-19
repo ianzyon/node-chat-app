@@ -1,63 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
-        <title>Meu Chat Zica</title>
+        <title>Entrar | Chat </title>
         <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="/css/bootstrap.min.css">
-        <link href="/css/styles.css" rel="stylesheet">
+        <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+         <link rel="stylesheet" href="/css/bootstrap.min.css"> 
+        <link href="css/styles.css" rel="stylesheet">
     </head>
-    <body class="chat">
-
-        <div class="chat__sidebar col-2 sm-2">
-            <h3>Usuários</h3>
-            <div id="users"></div>
-        </div>
-
-        <div class="chat__main">
-
-            <ol id="msgList" class="chat__messages">  
-                <!-- Alerts  -->
-                <li id="my-alert"> 
-                </li>  
-            </ol>  
+    <body class="centered-form">
+        <div class="centered-form__form">
+           <form action="/chat.html">
+                <div class="form-field">
+                    <h3>Entrar no Chat</h3>
+                </div>
+                <div class="form-field">
+                    <label>Apelido:</label>
+                    <input type="text" name="name" value="" autofocus>
+                </div>    
+                <div class="form-field">
+                    <label>Nome da Sala:</label>
+                    <input type="text" name="room" value="">
+                </div>
+                <div class="form-field">
+                    <button type="submit">Entrar</button>
+                </div>
+           </form> 
             
-                
-            <div class="chat__footer">
-                <!-- Forms and buttons  -->
-                <form id="msg-form" class="form-inline">
-                    <input class="form-control col-lg" type="text" name="message" value="" placeholder="Message Here" autofocus autocomplete="off">
-                    <button id="send-msg"class="" type="submit" >Send</button> 
-                    <button id="send-loc"class="" type="button" style="margin-left: 10px;">Mandar Local</button> 
-                </form> 
-            </div>
-
+            
         </div>
-        <script id="message-template" type="text/template">
-            <li class="message">
-                <div class="message__title">
-                    <h3>{{from}}</h3>
-                    <span>{{createdAt}}</span>
-                </div>
-                <div class="message__body">
-                    <p>{{text}}</p>
-                </div>
-            </li>    
-        </script>
-        <script id="loc-message-template" type="text/template">
-            <li class="message">
-                <div class="message__title">
-                    <h3>{{from}}</h3>
-                    <span>{{createdAt}}</span>
-                </div>
-                <div class="message__body">
-                    <a href="{{url}}" target="_blank">{{text}}</a> <!-- _blank para abrir uma nova aba -->
-                </div>
-            </li>    
-        </script>
-    </body>
-   
 
+
+    </body>
     <script src="/js/libs/mustache.js" type="text/javascript"></script>
     <script src="/socket.io/socket.io.js" type="text/javascript"></script>   <!-- Lembrar de importar os arquivos na ordem dos thirdparty para os locais -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
@@ -65,6 +38,5 @@
     <script src="/js/libs/jquery-3.2.1.min.js" type="text/javascript"></script> 
     <script src="/js/libs/bootstrap.min.js" type="text/javascript"></script>
     <script src="/js/libs/moment.js" type="text/javascript"></script>
-    <script src="/js/index.js" type="text/javascript"></script>
-   
+    <script src="/js/chat.js" type="text/javascript"></script>
 </html>
