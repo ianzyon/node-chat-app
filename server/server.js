@@ -4,12 +4,14 @@ const publicPath = path.join(__dirname, '../public');
 const express = require('express');
 const socketIO = require('socket.io');
 
-
+const {isRealString} = require('./utils/validation');
 const {genMsg, genLocMsg} = require('./utils/message');
+const {Users} = require('./utils/users');
 // config express 
 var app = express();
 var server = http.createServer(app);
 var io = socketIO(server); // integrando S.IO com o server e express
+var users = new Users();
 
 // config de porta
 const port = process.env.PORT || 3000;
@@ -22,17 +24,14 @@ app.use(
         console.log('New User Connected');
 
         socket.on('disconnect', ()=>{
-            console.log("User left.");
+            var user = users.removeUser(socket.id);
+            
+            if (user) {
+                io.to(user.room).emit('updateUserList', users.getUsersList(user.room));
+                io.to(user.room).emit('newMessage', genMsg('Admin', `${user.name} saiu.`));
+            }
         });
-        // boas vindas from Admin.
-        socket.emit('newMessage', 
-            genMsg('Admin', 'Bem-vindo ao chat!')
-        );
-         
-        socket.broadcast.emit('newMessage',
-            genMsg('Admin', 'New User Joined.')
-        );
-
+  
         // recebendo novas mensagens
         socket.on('createMessage', (msg, callback )=>{
             console.log("Msg: ", msg);
@@ -46,6 +45,25 @@ app.use(
 
         socket.on('geolocation', (cord) => {
             io.emit('newLocMessage', genLocMsg('User', cord.latitude, cord.longitude));
+        });
+        // login
+        socket.on('join', (params, callback) => {
+            if (!isRealString(params.name) || !isRealString(params.room)){
+                return callback('Nome e Sala não informados.');
+            }
+            // entrar na sala 
+            socket.join(params.room);
+            users.removeUser(socket.id);
+            users.addUser(socket.id, params.name, params.room);
+
+            io.to(params.room).emit('updateUserList', users.getUsersList(params.room));
+
+            // boas vindas from Admin.
+            socket.emit('newMessage', genMsg('Admin', 'Bem-vindo ao chat!'));
+            
+        socket.broadcast.to(params.room).emit('newMessage', genMsg(`Admin`, `${params.name} entrou.`));
+
+            callback();
         });
         
     }); // fim de io    

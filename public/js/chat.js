@@ -1,5 +1,6 @@
 var socket = io();
 
+
 function scrollToBottom() {
     // selectors
     var messages = $('#msgList');
@@ -14,14 +15,37 @@ function scrollToBottom() {
     if(clientHeigth + scrollTop + newMsgHeight + lastMsgHeight >= scrollHeight) {
         messages.scrollTop(scrollHeight);
     }
-}
+};
 
 
 socket.on('connect', function() { // ES5 permitido nos navegadores apenas
-    console.log("Connected to Server");
+    var params = $.deparam(window.location.search);
+
+    socket.emit('join', {
+        name: params.name,
+        room: params.room
+    }, function(err) {
+        if (err){ 
+            alert(err);
+            window.location.href='/';
+           
+        } else {
+            console.log('No error');
+        }
+    });
 });
 socket.on('disconnect', function() {
     console.log('Disconnected from server');
+});
+
+socket.on('updateUserList', function(users){
+    var ol = $('<ol></ol>');
+
+    users.forEach((user)=>{
+        ol.append($("<li></li>").text(user));
+    });
+
+    $('#users').html(ol);
 });
 
 socket.on('newMessage', function(msg){
