@@ -85,14 +85,13 @@ socket.on('newLocMessage', function (msg) {
 
 // Manipulando o msg-form ativado pelo botão Send
 $('#msg-form').on('submit', function (e) {
-     e.preventDefault();
+    e.preventDefault();
 
-     socket.emit('createMessage', {
-         from: 'User',
-         text: $('[name=message]').val()
-     }, function (akn) {
-        console.log('AKN', akn);
-       });
+    socket.emit('createMessage', {
+        text: $('[name=message]').val()
+    }, function (akn) {
+    console.log('AKN', akn);
+    });
     $('[name=message]').val("");
 });
 

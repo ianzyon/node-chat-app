@@ -34,17 +34,22 @@ app.use(
   
         // recebendo novas mensagens
         socket.on('createMessage', (msg, callback )=>{
-            console.log("Msg: ", msg);
+            var user = users.getUser(socket.id);
+
+            if (user){
+
+                io.to(user.room).emit('newMessage', 
+                    genMsg( user.name , msg.text));
+            }
             // emite novas mensagens
-            io.emit('newMessage', 
-                genMsg( msg.from, msg.text)
-            );
+            
             callback();
       
         });
 
         socket.on('geolocation', (cord) => {
-            io.emit('newLocMessage', genLocMsg('User', cord.latitude, cord.longitude));
+            var user = users.getUser(socket.id);
+            io.to(user.room).emit('newLocMessage', genLocMsg( user.name, cord.latitude, cord.longitude));
         });
         // login
         socket.on('join', (params, callback) => {
